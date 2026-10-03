@@ -6,6 +6,10 @@ DOMAIN = "myskoda_public"
 
 API_BASE_URL = "https://public.api.connect.skoda-auto.cz"
 
+# Muss mit "version" in manifest.json übereinstimmen (wird für das Cache-Busting der Karten genutzt)
+INTEGRATION_VERSION = "0.2.0"
+CARDS_URL = "/myskoda_public/skoda-cards.js"
+
 CONF_API_KEY = "api_key"
 CONF_VIN = "vin"
 CONF_SPIN = "spin"

@@ -2,14 +2,22 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
+from homeassistant.components.frontend import add_extra_js_url
+from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.typing import ConfigType
 
 from .api import SkodaPublicApi
-from .const import CONF_API_KEY, CONF_VIN
+from .const import CARDS_URL, CONF_API_KEY, CONF_VIN, DOMAIN, INTEGRATION_VERSION
 from .coordinator import SkodaCoordinator
+
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 PLATFORMS: list[Platform] = [
     Platform.BINARY_SENSOR,
@@ -22,6 +30,17 @@ PLATFORMS: list[Platform] = [
 ]
 
 type SkodaConfigEntry = ConfigEntry[SkodaCoordinator]
+
+
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Dashboard-Karten (JavaScript) für alle Browser bereitstellen."""
+    js_file = Path(__file__).parent / "frontend" / "skoda-cards.js"
+    await hass.http.async_register_static_paths(
+        [StaticPathConfig(CARDS_URL, str(js_file), cache_headers=False)]
+    )
+    # Query-Parameter sorgt dafür, dass Browser nach Updates die neue Datei laden
+    add_extra_js_url(hass, f"{CARDS_URL}?v={INTEGRATION_VERSION}")
+    return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: SkodaConfigEntry) -> bool:

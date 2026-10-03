@@ -55,11 +55,27 @@ Die API erlaubt aktuell **20 Anfragen pro Stunde und FIN** (Befehle zählen mit,
 - Bei `429` pausiert die Integration gemäß `Retry-After`.
 - Der Sensor *Verbleibende API-Anfragen* (Diagnose) zeigt das Restkontingent.
 
-## Dashboard
+## Dashboard-Karten
 
-Eine fertige Ansicht mit Standardkarten liegt in [`dashboard/skoda_dashboard.yaml`](dashboard/skoda_dashboard.yaml)
-(Ladestand, Laden, Klimatisierung, Fahrzeugstatus, Karte). Den Platzhalter `my_skoda` durch den Gerätenamen deines
-Fahrzeugs ersetzen.
+Die Integration bringt vier Karten mit, die du im Dashboard direkt über **Karte hinzufügen** auswählst
+(Suche nach „Škoda“):
+
+| Karte | Inhalt |
+|---|---|
+| Škoda – Laden | Ladestand, Reichweite, Ladezustand, Laden an/aus, Ladelimit, Lademodus |
+| Škoda – Klimatisierung | Standklimatisierung mit Zieltemperatur |
+| Škoda – Fahrzeugstatus | Verriegelung, Türen, Fenster, Kofferraum, Licht, Kilometerstand |
+| Škoda – Standort | Letzte Parkposition auf der Karte |
+
+Im Karteneditor wählst du nur das Fahrzeug aus; die Entities werden automatisch gefunden (kein Platzhalter-Austausch nötig).
+Mit nur einem Fahrzeug musst du gar nichts auswählen. Die Karten bestehen aus Standardkarten von Home Assistant,
+Funktionen, die dein Fahrzeug nicht hat, werden weggelassen.
+
+In YAML: `type: custom:skoda-charging-card` (optional `device_id: …`).
+Falls die Karten nach einem Update nicht erscheinen, Browser-Cache leeren bzw. die Seite hart neu laden.
+
+Eine statische Beispielansicht (mit Platzhalter `my_skoda`) liegt zusätzlich in
+[`dashboard/skoda_dashboard.yaml`](dashboard/skoda_dashboard.yaml).
 
 ## Entwicklung
 
