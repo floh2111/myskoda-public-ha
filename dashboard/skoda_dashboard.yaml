@@ -1,0 +1,84 @@
+# Dashboard-Ansicht für die MyŠkoda Public API Integration
+#
+# Verwendung: Dashboard bearbeiten -> Rohkonfigurations-Editor -> unter "views:" einfügen.
+# Es werden nur Standardkarten genutzt (kein HACS nötig).
+#
+# WICHTIG: "my_skoda" ist der Platzhalter für den Gerätenamen. Ersetze ihn per
+# Suchen & Ersetzen durch den Namen deines Fahrzeugs, z. B. "enyaq" bei einem
+# Fahrzeug namens "Enyaq" (Entity-IDs siehe Einstellungen -> Geräte & Dienste).
+# Karten für Funktionen, die dein Fahrzeug nicht hat (z. B. Laden bei einem
+# Verbrenner), kannst du einfach löschen.
+
+title: Škoda
+path: skoda
+icon: mdi:car-electric
+cards:
+  - type: vertical-stack
+    cards:
+      - type: gauge
+        entity: sensor.my_skoda_ladestand
+        name: Ladestand
+        min: 0
+        max: 100
+        needle: false
+        severity:
+          red: 0
+          yellow: 20
+          green: 40
+      - type: tile
+        entity: sensor.my_skoda_elektrische_reichweite
+        name: Reichweite
+        icon: mdi:map-marker-distance
+      - type: tile
+        entity: sensor.my_skoda_ladezustand
+        name: Ladezustand
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: binary_sensor.my_skoda_ladt
+            state: "on"
+        card:
+          type: entities
+          entities:
+            - entity: sensor.my_skoda_ladeleistung
+            - entity: sensor.my_skoda_restladezeit
+            - entity: sensor.my_skoda_voll_geladen_um
+
+  - type: entities
+    title: Laden
+    entities:
+      - entity: switch.my_skoda_laden
+      - entity: number.my_skoda_ladelimit
+      - entity: select.my_skoda_lademodus
+      - entity: binary_sensor.my_skoda_ladekabel
+      - entity: sensor.my_skoda_aktives_ladeprofil
+
+  - type: thermostat
+    entity: climate.my_skoda_klimatisierung
+    name: Klimatisierung
+
+  - type: entities
+    title: Fahrzeug
+    entities:
+      - entity: binary_sensor.my_skoda_zentralverriegelung
+      - entity: binary_sensor.my_skoda_turen
+      - entity: binary_sensor.my_skoda_fenster
+      - entity: binary_sensor.my_skoda_kofferraum
+      - entity: binary_sensor.my_skoda_motorhaube
+      - entity: binary_sensor.my_skoda_licht
+      - entity: sensor.my_skoda_kilometerstand
+      - entity: switch.my_skoda_standluftung
+      - entity: switch.my_skoda_standheizung
+
+  - type: map
+    title: Standort
+    entities:
+      - entity: device_tracker.my_skoda_standort
+    default_zoom: 15
+    aspect_ratio: "16:9"
+
+  - type: entities
+    title: API (Diagnose)
+    entities:
+      - entity: sensor.my_skoda_verbleibende_api_anfragen
+      - entity: sensor.my_skoda_api_key_lauft_ab

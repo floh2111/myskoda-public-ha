@@ -1,0 +1,217 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "MyŠkoda Public API",
+        "description": "Erstelle in der MyŠkoda-App einen API-Key (API-Keys verwalten) und wähle dort dein Fahrzeug aus. Trage den Key und die 17-stellige FIN ein.",
+        "data": {
+          "api_key": "API-Key",
+          "vin": "FIN (VIN)"
+        }
+      },
+      "reauth_confirm": {
+        "title": "API-Key abgelaufen",
+        "description": "Erstelle in der MyŠkoda-App einen neuen API-Key für {vin} und trage ihn hier ein.",
+        "data": {
+          "api_key": "Neuer API-Key"
+        }
+      },
+      "reconfigure": {
+        "title": "API-Key austauschen",
+        "data": {
+          "api_key": "Neuer API-Key"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "API-Key ungültig, abgelaufen oder für dieses Fahrzeug nicht berechtigt.",
+      "vehicle_not_found": "Zu dieser FIN wurde kein Fahrzeug gefunden.",
+      "invalid_vin": "Die FIN muss 17 Zeichen haben.",
+      "rate_limited": "Anfragelimit erreicht. Bitte später erneut versuchen.",
+      "cannot_connect": "Verbindung zur MyŠkoda-API fehlgeschlagen."
+    },
+    "abort": {
+      "already_configured": "Dieses Fahrzeug ist bereits eingerichtet.",
+      "reauth_successful": "API-Key aktualisiert.",
+      "reconfigure_successful": "API-Key aktualisiert."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Optionen",
+        "description": "Die API erlaubt aktuell ca. 20 Anfragen pro Stunde und Fahrzeug, Befehle zählen mit. Intervalle unter 15 Minuten lassen weniger Platz für Befehle.",
+        "data": {
+          "scan_interval": "Abfrageintervall (Minuten)",
+          "spin": "S-PIN (nur für Standheizung nötig)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery_level": {
+        "name": "Ladestand"
+      },
+      "electric_range": {
+        "name": "Elektrische Reichweite"
+      },
+      "charging_power": {
+        "name": "Ladeleistung"
+      },
+      "charging_rate": {
+        "name": "Laderate"
+      },
+      "remaining_charging_time": {
+        "name": "Restladezeit"
+      },
+      "fully_charged_at": {
+        "name": "Voll geladen um"
+      },
+      "charging_state": {
+        "name": "Ladezustand",
+        "state": {
+          "connect_cable": "Kabel anschließen",
+          "charging": "Lädt",
+          "conserving": "Erhaltungsladung",
+          "ready_for_charging": "Bereit zum Laden",
+          "discharging": "Entlädt",
+          "charging_interrupted": "Laden unterbrochen"
+        }
+      },
+      "charge_type": {
+        "name": "Ladeart",
+        "state": {
+          "ac": "AC",
+          "dc": "DC",
+          "off": "Aus"
+        }
+      },
+      "target_soc": {
+        "name": "Ziel-Ladestand"
+      },
+      "max_charge_current": {
+        "name": "Max. AC-Ladestrom"
+      },
+      "charging_profile": {
+        "name": "Aktives Ladeprofil"
+      },
+      "odometer": {
+        "name": "Kilometerstand"
+      },
+      "total_range": {
+        "name": "Gesamtreichweite"
+      },
+      "fuel_level": {
+        "name": "Tankfüllung"
+      },
+      "adblue_range": {
+        "name": "AdBlue-Reichweite"
+      },
+      "air_conditioning_state": {
+        "name": "Klimatisierung Zustand",
+        "state": {
+          "off": "Aus",
+          "cooling": "Kühlen",
+          "heating": "Heizen",
+          "heating_auxiliary": "Zuheizer",
+          "ventilation": "Lüften",
+          "completed": "Abgeschlossen"
+        }
+      },
+      "air_conditioning_target": {
+        "name": "Klimatisierung Zieltemperatur"
+      },
+      "parking_address": {
+        "name": "Parkadresse"
+      },
+      "api_key_expires": {
+        "name": "API-Key läuft ab"
+      },
+      "api_quota_remaining": {
+        "name": "Verbleibende API-Anfragen"
+      }
+    },
+    "binary_sensor": {
+      "doors": {
+        "name": "Türen"
+      },
+      "windows": {
+        "name": "Fenster"
+      },
+      "lights": {
+        "name": "Licht"
+      },
+      "trunk": {
+        "name": "Kofferraum"
+      },
+      "bonnet": {
+        "name": "Motorhaube"
+      },
+      "sunroof": {
+        "name": "Schiebedach"
+      },
+      "unlocked": {
+        "name": "Zentralverriegelung"
+      },
+      "charging": {
+        "name": "Lädt"
+      },
+      "plug_connected": {
+        "name": "Ladekabel"
+      },
+      "plug_unlocked": {
+        "name": "Ladestecker-Verriegelung"
+      },
+      "at_saved_location": {
+        "name": "An gespeichertem Ladeort"
+      },
+      "window_heating_front": {
+        "name": "Frontscheibenheizung"
+      },
+      "window_heating_rear": {
+        "name": "Heckscheibenheizung"
+      }
+    },
+    "climate": {
+      "air_conditioning": {
+        "name": "Klimatisierung"
+      }
+    },
+    "device_tracker": {
+      "location": {
+        "name": "Standort"
+      }
+    },
+    "number": {
+      "charge_limit": {
+        "name": "Ladelimit"
+      }
+    },
+    "select": {
+      "charge_mode": {
+        "name": "Lademodus",
+        "state": {
+          "manual": "Manuell",
+          "timer": "Timer",
+          "timer_charging_with_climatisation": "Timer mit Klimatisierung",
+          "preferred_charging_times": "Bevorzugte Ladezeiten",
+          "only_own_current": "Nur eigener Strom",
+          "immediate_discharging": "Sofort entladen",
+          "home_storage_charging": "Heimspeicher-Laden"
+        }
+      }
+    },
+    "switch": {
+      "charging_switch": {
+        "name": "Laden"
+      },
+      "active_ventilation": {
+        "name": "Standlüftung"
+      },
+      "auxiliary_heating": {
+        "name": "Standheizung"
+      }
+    }
+  }
+}

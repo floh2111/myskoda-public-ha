@@ -1,0 +1,12 @@
+{
+  "domain": "myskoda_public",
+  "name": "MyŠkoda Public API",
+  "codeowners": ["@floh2111"],
+  "config_flow": true,
+  "documentation": "https://public.api.connect.skoda-auto.cz/docs",
+  "integration_type": "device",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/floh2111/myskoda-public-ha/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
